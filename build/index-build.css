@@ -390,7 +390,7 @@
   }
 }
 
-
+@charset "UTF-8";
 html {
   height: 100%;
 }
@@ -401,10 +401,13 @@ body {
 .iga-root {
   height: 100%;
 }
-.iga-root .viewer-hold {
+.iga-root .the-viewer {
   height: 100%;
 }
-.iga-root .viewer-hold ul {
+.iga-root .the-viewer ul {
+  display: none;
+}
+.iga-root .the-viewer .viewer-button {
   display: none;
 }
 
