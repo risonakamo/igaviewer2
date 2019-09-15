@@ -1,11 +1,15 @@
 import {createStore} from "redux";
 
-/* actions:
-   loadImgurImgs
-   {
-       object-array data: array of imgur image data objects from an imgur api call
-   }
- */
+var store;
+
+//load imgur images, give it array of imgur image data objects from an imgur api call
+export function loadImgurImgsAction(data)
+{
+    store.dispatch({
+        type:"loadImgurImgs",
+        data
+    })  ;
+}
 
 //reducer for imgs, array containing loaded images
 function imgsReduce(imgs,act)
@@ -20,7 +24,7 @@ function imgsReduce(imgs,act)
     return imgs;
 }
 
-var store=createStore((state,act)=>{
+store=createStore((state,act)=>{
     return {
         imgs:imgsReduce(state.imgs,act)
     };

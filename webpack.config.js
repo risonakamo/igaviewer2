@@ -46,5 +46,5 @@ module.exports={
         }
     },
 
-    watch:false
+    watch:true
 };

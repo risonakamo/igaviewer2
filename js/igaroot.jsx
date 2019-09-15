@@ -2,12 +2,13 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {getAlbum,getAlbumInfo} from "./imgurhelpers";
+import {loadImgurImgsAction} from "./thestore";
 
 import Viewer from "viewerjs";
 import "viewerjs/dist/viewer.css";
 
-/* IgaRoot(array imgs)
-   imgs: array of imgs to load */
+/* IgaRoot(store-array imgs)
+   imgs: array of imgs to load, from the store*/
 class IgaRoot extends React.Component
 {
   constructor(props)
@@ -33,7 +34,7 @@ class IgaRoot extends React.Component
     // });
 
     getAlbum("ZVPTV",(data)=>{
-      this.loadImgurImages(data.data);
+      loadImgurImgsAction(data.data);
     });
 
     window.viewer=this.theviewer;
