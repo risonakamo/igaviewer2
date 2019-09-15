@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin=require('mini-css-extract-plugin');
 
 module.exports={
-    mode:"production",
+    mode:"development",
     entry:{
         index:"./index.jsx"
     },
@@ -39,5 +39,12 @@ module.exports={
         })
     ],
 
-    watch:true
+    optimization:{
+        splitChunks:{
+            chunks:"all",
+            automaticNameDelimiter:"-"
+        }
+    },
+
+    watch:false
 };
