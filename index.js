@@ -1,5 +1,4 @@
 import IgaRoot from "./igaroot.jsx";
-
 import "./index.less";
 
 window.onload=main;

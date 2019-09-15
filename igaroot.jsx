@@ -1,6 +1,8 @@
 import Viewer from "viewerjs";
 import "viewerjs/dist/viewer.css";
 
+import store from "./thestore";
+
 export default class IgaRoot extends React.Component
 {
   constructor(props)
