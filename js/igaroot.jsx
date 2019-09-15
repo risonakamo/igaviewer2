@@ -47,7 +47,7 @@ class IgaRoot extends React.Component
     return <>
       <div className="the-viewer">
         <ul ref={this.theviewerElement}>
-          <li><img src="testball.jpg"/></li>
+          <li><img src="img/testball.jpg"/></li>
           <li><img src="https://i.imgur.com/moL99Yv.jpg"/></li>
           <li><img src="https://i.imgur.com/C1AQTl5.jpg"/></li>
         </ul>
