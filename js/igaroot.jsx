@@ -20,6 +20,9 @@ class IgaRoot extends React.Component
       currentImageIndex:0
     };
 
+    //image repositioning has not completed, dont save image positioning if the image changes
+    this.imageChangeInProgress=false;
+
     this.theviewer; //the actual viewer object
     this.theviewerElement=React.createRef(); //the element viewer is attached to
   }
@@ -30,10 +33,14 @@ class IgaRoot extends React.Component
       inline:true,
       title:false,
       keyboard:false,
+      button:false,
+      zoomRatio:.3,
+      backdrop:false,
       ready:()=>{
         this.theviewer.full();
       },
       viewed:()=>{
+        this.imageChangeInProgress=false;
         if (_.get(this.state.currentImage,"zoom"))
         {
           this.theviewer.zoomTo(this.state.currentImage.zoom);
@@ -92,10 +99,14 @@ class IgaRoot extends React.Component
     // console.log(currentimage);
     // console.log(this.theviewer);
 
-    currentimage.zoom=this.theviewer.imageData.ratio;
-    currentimage.left=this.theviewer.imageData.left;
-    currentimage.top=this.theviewer.imageData.top;
+    if (!this.imageChangeInProgress)
+    {
+      currentimage.zoom=this.theviewer.imageData.ratio;
+      currentimage.left=this.theviewer.imageData.left;
+      currentimage.top=this.theviewer.imageData.top;
+    }
 
+    this.imageChangeInProgress=true;
     this.setState({
       currentImageIndex:imgIndex,
       currentImage:this.props.imgs[imgIndex]

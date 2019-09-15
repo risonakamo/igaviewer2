@@ -5,6 +5,7 @@ html {
 body {
   margin: 0;
   height: 100%;
+  background-color: #141518;
 }
 .iga-root {
   height: 100%;
@@ -13,9 +14,6 @@ body {
   height: 100%;
 }
 .iga-root .the-viewer ul {
-  display: none;
-}
-.iga-root .the-viewer .viewer-button {
   display: none;
 }
 
