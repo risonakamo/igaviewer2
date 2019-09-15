@@ -17,7 +17,9 @@ function imgsReduce(imgs,act)
     if (act.type=="loadImgurImgs")
     {
         return _.map(act.data,(x)=>{
-            return x.link;
+            return {
+                link:x.link
+            };
         });
     }
 

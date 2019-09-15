@@ -15,6 +15,11 @@ class IgaRoot extends React.Component
   {
     super(props);
 
+    this.state={
+      currentImage:null,
+      currentImageIndex:0
+    };
+
     this.theviewer; //the actual viewer object
     this.theviewerElement=React.createRef(); //the element viewer is attached to
   }
@@ -24,8 +29,16 @@ class IgaRoot extends React.Component
     this.theviewer=new Viewer(this.theviewerElement.current,{
       inline:true,
       title:false,
+      keyboard:false,
       ready:()=>{
         this.theviewer.full();
+      },
+      viewed:()=>{
+        if (_.get(this.state.currentImage,"zoom"))
+        {
+          this.theviewer.zoomTo(this.state.currentImage.zoom);
+          this.theviewer.moveTo(this.state.currentImage.left,this.state.currentImage.top);
+        }
       }
     });
 
@@ -36,6 +49,8 @@ class IgaRoot extends React.Component
     getAlbum("ZVPTV",(data)=>{
       loadImgurImgsAction(data.data);
     });
+
+    this.keyControl();
 
     window.viewer=this.theviewer;
     window.igaroot=this;
@@ -60,22 +75,66 @@ class IgaRoot extends React.Component
     this.theviewer.moveTo(this.theviewer.containerData.width/2-this.theviewer.imageData.width/2,0);
   }
 
-  //give it array of imgur image data objects, from an imgur api call
-  loadImgurImages(data)
+  //navigate to the given image index
+  navigateImage(imgIndex)
   {
-    this.props.dispatch({
-      type:"loadImgurImgs",
-      data
+    if (imgIndex>=this.props.imgs.length || imgIndex<0)
+    {
+      return;
+    }
+
+    var currentimage=this.state.currentImage;
+    if (!currentimage)
+    {
+      currentimage=this.props.imgs[0];
+    }
+
+    // console.log(currentimage);
+    // console.log(this.theviewer);
+
+    currentimage.zoom=this.theviewer.imageData.ratio;
+    currentimage.left=this.theviewer.imageData.left;
+    currentimage.top=this.theviewer.imageData.top;
+
+    this.setState({
+      currentImageIndex:imgIndex,
+      currentImage:this.props.imgs[imgIndex]
+    });
+  }
+
+  keyControl()
+  {
+    document.addEventListener("keydown",(e)=>{
+      console.log(e.key);
+      if (e.key=="ArrowRight" || e.key==" " || e.key=="d")
+      {
+        this.navigateImage(this.state.currentImageIndex+1);
+      }
+
+      else if (e.key=="ArrowLeft" || e.key=="a")
+      {
+        this.navigateImage(this.state.currentImageIndex-1);
+      }
+
+      else if (e.key=="f")
+      {
+        this.fitHeight();
+      }
     });
   }
 
   render()
   {
+    if (this.theviewer)
+    {
+      this.theviewer.view(this.state.currentImageIndex);
+    }
+
     return <>
       <div className="the-viewer">
         <ul ref={this.theviewerElement}>
           {_.map(this.props.imgs,(x,i)=>{
-            return <li key={i}><img src={x}/></li>;
+            return <li key={i}><img src={x.link}/></li>;
           })}
         </ul>
       </div>
