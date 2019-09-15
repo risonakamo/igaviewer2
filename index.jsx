@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 
 import IgaRoot from "./js/igaroot.jsx";
 import "./index.less";
-
 import store from "./js/thestore";
 
 window.onload=main;

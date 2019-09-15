@@ -1,9 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
+import _ from "lodash";
+
+import {getAlbum,getAlbumInfo} from "./imgurhelpers";
 
 import Viewer from "viewerjs";
 import "viewerjs/dist/viewer.css";
 
+/* IgaRoot(array imgs)
+   imgs: array of imgs to load */
 class IgaRoot extends React.Component
 {
   constructor(props)
@@ -24,8 +29,21 @@ class IgaRoot extends React.Component
       }
     });
 
+    // getAlbumInfo("ZVPTV",(data)=>{
+    //   console.log(data);
+    // });
+
+    getAlbum("ZVPTV",(data)=>{
+      this.loadImgurImages(data.data);
+    });
+
     window.viewer=this.theviewer;
     window.igaroot=this;
+  }
+
+  componentDidUpdate()
+  {
+    this.theviewer.update();
   }
 
   //do fit width on the viewer
@@ -42,18 +60,31 @@ class IgaRoot extends React.Component
     this.theviewer.moveTo(this.theviewer.containerData.width/2-this.theviewer.imageData.width/2,0);
   }
 
+  //give it array of imgur image data objects, from an imgur api call
+  loadImgurImages(data)
+  {
+    this.props.dispatch({
+      type:"loadImgurImgs",
+      data
+    });
+  }
+
   render()
   {
     return <>
       <div className="the-viewer">
         <ul ref={this.theviewerElement}>
-          <li><img src="img/testball.jpg"/></li>
-          <li><img src="https://i.imgur.com/moL99Yv.jpg"/></li>
-          <li><img src="https://i.imgur.com/C1AQTl5.jpg"/></li>
+          {_.map(this.props.imgs,(x,i)=>{
+            return <li key={i}><img src={x}/></li>;
+          })}
         </ul>
       </div>
     </>;
   }
 }
 
-export default connect()(IgaRoot);
+export default connect((storestate)=>{
+  return {
+    imgs:storestate.imgs
+  };
+})(IgaRoot);
