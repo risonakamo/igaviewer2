@@ -105,7 +105,7 @@ class IgaRoot extends React.Component
   keyControl()
   {
     document.addEventListener("keydown",(e)=>{
-      console.log(e.key);
+      // console.log(e.key);
       if (e.key=="ArrowRight" || e.key==" " || e.key=="d")
       {
         this.navigateImage(this.state.currentImageIndex+1);
