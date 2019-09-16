@@ -23,6 +23,9 @@ class IgaRoot extends React.Component
     //image repositioning has not completed, dont save image positioning if the image changes
     this.imageChangeInProgress=false;
 
+    //fit height operation occured, next time it will fit width, resets every image change to fit height
+    this.justFitHeight=false;
+
     this.theviewer; //the actual viewer object
     this.theviewerElement=React.createRef(); //the element viewer is attached to
   }
@@ -123,6 +126,11 @@ class IgaRoot extends React.Component
   {
     document.addEventListener("keydown",(e)=>{
       // console.log(e.key);
+      if (e.key!="f")
+      {
+        this.justFitHeight=false;
+      }
+
       if (e.key=="ArrowRight" || e.key==" " || e.key=="d")
       {
         this.navigateImage(this.state.currentImageIndex+1);
@@ -135,7 +143,17 @@ class IgaRoot extends React.Component
 
       else if (e.key=="f")
       {
-        this.fitHeight();
+        if (this.justFitHeight)
+        {
+          this.fitWidth();
+          this.justFitHeight=false;
+        }
+
+        else
+        {
+          this.fitHeight();
+          this.justFitHeight=true;
+        }
       }
     });
   }
