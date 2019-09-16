@@ -53,9 +53,14 @@ class IgaRoot extends React.Component
     //   console.log(data);
     // });
 
-    getAlbum("ZVPTV",(data)=>{
-      loadImgurImgsAction(data.data);
-    });
+    var imgurHash=window.location.hash.split("#");
+
+    if (imgurHash.length>1)
+    {
+      getAlbum(imgurHash[1],(data)=>{
+        loadImgurImgsAction(data.data);
+      });
+    }
 
     this.keyControl();
 
@@ -113,6 +118,7 @@ class IgaRoot extends React.Component
     });
   }
 
+  //deploy global keyboard controls
   keyControl()
   {
     document.addEventListener("keydown",(e)=>{
