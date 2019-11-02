@@ -131,7 +131,17 @@ class IgaRoot extends React.Component
         this.justFitHeight=false;
       }
 
-      if (e.key=="ArrowRight" || e.key==" " || e.key=="d")
+      if (e.key=="e")
+      {
+        this.theviewer.zoom(.1,true);
+      }
+
+      else if (e.key=="q")
+      {
+        this.theviewer.zoom(-.1,true);
+      }
+
+      else if (e.key=="ArrowRight" || e.key==" " || e.key=="d")
       {
         this.navigateImage(this.state.currentImageIndex+1);
       }
