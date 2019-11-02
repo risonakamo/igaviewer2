@@ -49,6 +49,16 @@ class IgaRoot extends React.Component
           this.theviewer.zoomTo(this.state.currentImage.zoom);
           this.theviewer.moveTo(this.state.currentImage.left,this.state.currentImage.top);
         }
+
+        else if ((this.theviewer.containerData.width/this.theviewer.containerData.height)>this.theviewer.imageData.aspectRatio)
+        {
+          this.fitHeight();
+        }
+
+        else
+        {
+          this.fitWidth();
+        }
       }
     });
 
@@ -80,7 +90,7 @@ class IgaRoot extends React.Component
   fitWidth()
   {
     this.theviewer.zoomTo(this.theviewer.containerData.width/this.theviewer.imageData.naturalWidth);
-    this.theviewer.moveTo(0);
+    this.theviewer.moveTo(0,this.theviewer.containerData.height/2-this.theviewer.imageData.height/2);
   }
 
   //do fit height on the viewer
