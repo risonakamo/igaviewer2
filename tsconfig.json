@@ -1,0 +1,16 @@
+{
+    "compilerOptions":{
+        "jsx":"react",
+        "noImplicitAny":true
+    },
+    "include":[
+        "*.ts",
+        "**/*.ts",
+        "**/*.d.ts",
+        "*.tsx",
+        "**/*.tsx"
+    ],
+    "exclude":[
+        "node_modules"
+    ]
+}

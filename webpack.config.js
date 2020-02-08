@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin=require('mini-css-extract-plugin');
+const ForkTsCheckerWebpackPlugin=require("fork-ts-checker-webpack-plugin");
 
 module.exports={
     mode:"development",
@@ -13,12 +14,12 @@ module.exports={
     module:{
         rules:[
             {
-                test:/\.(jsx|js)$/,
+                test:/\.(jsx|js|ts|tsx)$/,
                 exclude:/node_modules/,
                 use:{
                     loader:"babel-loader",
                     options:{
-                        presets:["@babel/preset-react"]
+                        presets:["@babel/preset-react","@babel/preset-typescript"]
                     }
                 }
             },
@@ -36,7 +37,9 @@ module.exports={
     plugins:[
         new MiniCssExtractPlugin({
             filename:"[name]-build.css"
-        })
+        }),
+
+        new ForkTsCheckerWebpackPlugin()
     ],
 
     optimization:{
