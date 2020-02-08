@@ -46,5 +46,7 @@ module.exports={
         }
     },
 
-    watch:true
+    resolve:{
+        extensions:[".tsx",".ts",".jsx"]
+    }
 };

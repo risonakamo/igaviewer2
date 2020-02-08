@@ -1,22 +1,28 @@
 {
   "name": "igaviewer2",
   "version": "1.0.0",
+  "scripts": {
+    "linkall": "npm-link -D webpack webpack-cli babel-loader @babel/core @babel/preset-react less less-loader css-loader mini-css-extract-plugin @babel/preset-typescript typescript fork-ts-checker-webpack-plugin"
+  },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
     "babel-loader": "^8.0.6",
-    "css-loader": "^3.2.0",
+    "css-loader": "^3.4.2",
+    "fork-ts-checker-webpack-plugin": "^4.0.3",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
-    "mini-css-extract-plugin": "^0.8.0",
-    "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8"
+    "mini-css-extract-plugin": "^0.8.2",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-redux": "^7.1.1",
-    "redux": "^4.0.4",
-    "viewerjs": "^1.3.6"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "redux": "^4.0.5",
+    "viewerjs": "^1.5.0"
   }
 }
