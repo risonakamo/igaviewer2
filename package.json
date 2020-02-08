@@ -2,7 +2,9 @@
   "name": "igaviewer2",
   "version": "1.0.0",
   "scripts": {
-    "linkall": "npm-link -D webpack webpack-cli babel-loader @babel/core @babel/preset-react less less-loader css-loader mini-css-extract-plugin @babel/preset-typescript typescript fork-ts-checker-webpack-plugin"
+    "linkall": "npm-link -D webpack webpack-cli babel-loader @babel/core @babel/preset-react less less-loader css-loader mini-css-extract-plugin @babel/preset-typescript typescript fork-ts-checker-webpack-plugin express",
+    "server": "node testserver/server",
+    "build": "webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -10,6 +12,7 @@
     "@babel/preset-typescript": "^7.8.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
+    "express": "^4.17.1",
     "fork-ts-checker-webpack-plugin": "^4.0.3",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",

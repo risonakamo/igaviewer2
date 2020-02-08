@@ -39,6 +39,7 @@ class IgaRoot extends React.Component
       button:false,
       zoomRatio:.3,
       backdrop:false,
+      transition:false,
       ready:()=>{
         this.theviewer.full();
       },
