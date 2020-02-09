@@ -17,7 +17,7 @@ type ReduxAction=LoadImgurImgsAction|ChangeCurrentIndexAction;
 var store:TheStore;
 
 //load imgur images, give it array of imgur image data objects from an imgur api call
-export function loadImgurImgsAction(data:ImageObject[])
+export function loadImgurImgsAction(data:ImageObject[]):void
 {
     store.dispatch({
         type:"loadImgurImgs",

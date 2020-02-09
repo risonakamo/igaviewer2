@@ -1,6 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 
+import {changeCurrentImageIndexAction} from "../thestore";
+
 import "./previewpanel.less";
 
 /* PreviewPanel(STORE-ImageObject[] imgs,STORE-int currentImageIndex) */
@@ -16,7 +18,8 @@ class PreviewPanel extends React.Component
     var thumbnails=_.map(this.props.imgs,(x:ImageObject,i:number)=>{
       var selected=this.props.currentImageIndex==i?true:false;
 
-      return <PreviewThumbnail thumbnailurl={convertThumbnail(x.link)} key={i} selected={selected}/>;
+      return <PreviewThumbnail thumbnailurl={convertThumbnail(x.link)}
+        key={i} selected={selected} indexNumber={i}/>;
     });
 
     return <div className="preview-panel">
@@ -25,18 +28,30 @@ class PreviewPanel extends React.Component
   }
 }
 
-/* PreviewThumbnail(string thumbnailurl,bool selected) */
+/* PreviewThumbnail(string thumbnailurl,bool selected,int indexNumber) */
 class PreviewThumbnail extends React.Component
 {
   props:{
     thumbnailurl:string // the url of the thumbnail to display, needs to already be a
                         // valid thumbail url that is the correct size
     selected:boolean // whether the thumbnail should show as selected
+    indexNumber:number // the index number of this thumbnail
+  }
+
+  constructor(props:any)
+  {
+    super(props);
+    this.clickAction=this.clickAction.bind(this);
+  }
+
+  clickAction()
+  {
+    changeCurrentImageIndexAction(this.props.indexNumber);
   }
 
   render()
   {
-    return <a className={`thumbnail ${this.props.selected?"selected":""}`}>
+    return <a className={`thumbnail ${this.props.selected?"selected":""}`} onClick={this.clickAction}>
       <img src={this.props.thumbnailurl}/>
       <div className="select-border"></div>
     </a>;
