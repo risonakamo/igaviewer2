@@ -26,16 +26,21 @@ export default class PreviewPanel extends React.Component
   }
 }
 
-/* PreviewThumbnail(string thumbnailurl) */
+/* PreviewThumbnail(string thumbnailurl,bool selected) */
 class PreviewThumbnail extends React.Component
 {
   props:{
-    thumbnailurl:string
+    thumbnailurl:string // the url of the thumbnail to display, needs to already be a
+                        // valid thumbail url that is the correct size
+    selected:boolean // whether the thumbnail should show as selected
   }
 
   render()
   {
-    return <a className="thumbnail"><img src={this.props.thumbnailurl}/></a>;
+    return <a className={`thumbnail ${this.props.selected?"selected":""}`}>
+      <img src={this.props.thumbnailurl}/>
+      <div className="select-border"></div>
+    </a>;
   }
 }
 
