@@ -5,13 +5,15 @@ import {changeCurrentImageIndexAction} from "../thestore";
 
 import "./previewpanel.less";
 
-/* PreviewPanel(STORE-ImageObject[] imgs,STORE-int currentImageIndex,STORE-bool showing) */
+/* PreviewPanel(STORE-ImageObject[] imgs, STORE-int currentImageIndex, STORE-bool showing,
+    callback navigateImage) */
 class PreviewPanel extends React.Component
 {
   props:{
     imgs:ImageObject[] // STORE: array of image objects
     currentImageIndex:number // STORE: index of the current image in the imgs array
     showing:boolean // STORE: show the preview panel or not
+    navigateImage(imgIndex:number):void // parent function to call to navigate to a image index
   }
 
   render()
@@ -20,7 +22,7 @@ class PreviewPanel extends React.Component
       var selected=this.props.currentImageIndex==i?true:false;
 
       return <PreviewThumbnail thumbnailurl={convertThumbnail(x.link)}
-        key={i} selected={selected} indexNumber={i}/>;
+        key={i} selected={selected} indexNumber={i} navigateImage={this.props.navigateImage}/>;
     });
 
     return <div className={`preview-panel ${this.props.showing?"":"hidden"}`}>
@@ -29,7 +31,7 @@ class PreviewPanel extends React.Component
   }
 }
 
-/* PreviewThumbnail(string thumbnailurl,bool selected,int indexNumber) */
+/* PreviewThumbnail(string thumbnailurl, bool selected, int indexNumber, callback navigateImage) */
 class PreviewThumbnail extends React.Component
 {
   props:{
@@ -37,6 +39,7 @@ class PreviewThumbnail extends React.Component
                         // valid thumbail url that is the correct size
     selected:boolean // whether the thumbnail should show as selected
     indexNumber:number // the index number of this thumbnail
+    navigateImage(imgIndex:number):void // parent function to call to navigate to a image index
   }
 
   constructor(props:any)
@@ -47,7 +50,7 @@ class PreviewThumbnail extends React.Component
 
   clickAction()
   {
-    changeCurrentImageIndexAction(this.props.indexNumber);
+    this.props.navigateImage(this.props.indexNumber);
   }
 
   render()

@@ -16,6 +16,7 @@ class IgaRoot extends React.Component
   constructor(props)
   {
     super(props);
+    this.navigateImage=this.navigateImage.bind(this);
 
     this.state={
       currentImage:null
@@ -200,7 +201,7 @@ class IgaRoot extends React.Component
           })}
         </ul>
       </div>
-      <PreviewPanel/>
+      <PreviewPanel navigateImage={this.navigateImage}/>
     </>;
   }
 }
