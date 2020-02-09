@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import {getAlbum,getAlbumInfo} from "./imgurhelpers";
 import {loadImgurImgsAction} from "./thestore";
-import PreviewPanel from "./previewpanel";
+import PreviewPanel from "./previewpanel/previewpanel";
 
 import Viewer from "viewerjs";
 import "viewerjs/dist/viewer.css";

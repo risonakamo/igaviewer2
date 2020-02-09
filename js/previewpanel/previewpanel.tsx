@@ -1,5 +1,6 @@
 import React from "react";
-declare const InstrinsicElements:any;
+
+import "./previewpanel.less";
 
 interface ImageObject
 {
@@ -19,7 +20,6 @@ export default class PreviewPanel extends React.Component
       return <PreviewThumbnail thumbnailurl={convertThumbnail(x.link)} key={i}/>;
     });
 
-
     return <div className="preview-panel">
       {thumbnails}
     </div>;
@@ -35,7 +35,7 @@ class PreviewThumbnail extends React.Component
 
   render()
   {
-    return <img src={this.props.thumbnailurl}/>;
+    return <a className="thumbnail"><img src={this.props.thumbnailurl}/></a>;
   }
 }
 
