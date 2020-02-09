@@ -7,17 +7,20 @@ interface ImageObject
   link:string
 }
 
-/* PreviewPanel(ImageObject[] imgs) */
+/* PreviewPanel(ImageObject[] imgs,int currentImageIndex) */
 export default class PreviewPanel extends React.Component
 {
   props:{
-    imgs:ImageObject[] //array of image objects from parent.
+    imgs:ImageObject[] // array of image objects from parent.
+    currentImageIndex:number // index of the current image in the imgs array.
   }
 
   render()
   {
     var thumbnails=_.map(this.props.imgs,(x:ImageObject,i:number)=>{
-      return <PreviewThumbnail thumbnailurl={convertThumbnail(x.link)} key={i}/>;
+      var selected=this.props.currentImageIndex==i?true:false;
+
+      return <PreviewThumbnail thumbnailurl={convertThumbnail(x.link)} key={i} selected={selected}/>;
     });
 
     return <div className="preview-panel">

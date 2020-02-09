@@ -195,7 +195,7 @@ class IgaRoot extends React.Component
           })}
         </ul>
       </div>
-      <PreviewPanel imgs={this.props.imgs}/>
+      <PreviewPanel imgs={this.props.imgs} currentImageIndex={this.state.currentImageIndex}/>
     </>;
   }
 }
