@@ -1,13 +1,5 @@
 import {createStore} from "redux";
 
-interface TheStore
-{
-    imgs:ImageObject[]
-    currentIndex:number
-
-    dispatch: Function
-}
-
 interface LoadImgurImgsAction
 {
     type:"loadImgurImgs"

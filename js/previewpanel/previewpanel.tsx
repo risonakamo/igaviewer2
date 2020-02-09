@@ -58,7 +58,7 @@ function convertThumbnail(url:string):string
   return `https://i.imgur.com/${match[1]}b${match[2]}`;
 }
 
-export default connect((storestate:any)=>{
+export default connect((storestate:TheStore)=>{
   return {
     imgs:storestate.imgs,
     currentImageIndex:storestate.currentIndex

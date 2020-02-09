@@ -15,3 +15,11 @@ interface ImageObject
 {
   link:string
 }
+
+interface TheStore
+{
+    imgs:ImageObject[]
+    currentIndex:number
+
+    dispatch: Function
+}
