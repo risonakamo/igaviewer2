@@ -1,6 +1,7 @@
 .preview-panel {
   position: absolute;
   display: flex;
+  max-height: 100vh;
   height: 100%;
   top: 0;
   left: 0;
@@ -10,6 +11,8 @@
   flex-wrap: wrap;
   align-content: flex-start;
   background-color: rgba(31, 31, 31, 0.4);
+  box-sizing: border-box;
+  overflow: auto;
 }
 .preview-panel.hidden {
   display: none;
