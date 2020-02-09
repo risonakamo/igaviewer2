@@ -11,6 +11,9 @@
   align-content: flex-start;
   background-color: rgba(31, 31, 31, 0.4);
 }
+.preview-panel.hidden {
+  display: none;
+}
 .preview-panel .thumbnail {
   position: relative;
   width: 160px;

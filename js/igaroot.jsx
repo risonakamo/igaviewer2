@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {getAlbum,getAlbumInfo} from "./imgurhelpers";
-import {loadImgurImgsAction,changeCurrentImageIndexAction} from "./thestore";
+import {loadImgurImgsAction,changeCurrentImageIndexAction,togglePanelShowing} from "./thestore";
 import PreviewPanel from "./previewpanel/previewpanel";
 
 import Viewer from "viewerjs";
@@ -40,7 +40,7 @@ class IgaRoot extends React.Component
       button:false,
       zoomRatio:.3,
       backdrop:false,
-      transition:false,
+      // transition:false,
       ready:()=>{
         this.theviewer.full();
       },
@@ -176,6 +176,11 @@ class IgaRoot extends React.Component
           this.fitHeight();
           this.justFitHeight=true;
         }
+      }
+
+      else if (e.key=="Escape")
+      {
+        togglePanelShowing();
       }
     });
   }

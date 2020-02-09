@@ -13,13 +13,14 @@ declare namespace JSX
 
 interface ImageObject
 {
-  link:string
+    link:string
 }
 
 interface TheStore
 {
     imgs:ImageObject[]
     currentIndex:number
+    panelShowing:boolean
 
     dispatch: Function
 }

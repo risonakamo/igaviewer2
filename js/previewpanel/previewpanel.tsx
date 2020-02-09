@@ -5,12 +5,13 @@ import {changeCurrentImageIndexAction} from "../thestore";
 
 import "./previewpanel.less";
 
-/* PreviewPanel(STORE-ImageObject[] imgs,STORE-int currentImageIndex) */
+/* PreviewPanel(STORE-ImageObject[] imgs,STORE-int currentImageIndex,STORE-bool showing) */
 class PreviewPanel extends React.Component
 {
   props:{
-    imgs:ImageObject[] // array of image objects, provided by STORE.
-    currentImageIndex:number // index of the current image in the imgs array, provided by store.
+    imgs:ImageObject[] // STORE: array of image objects
+    currentImageIndex:number // STORE: index of the current image in the imgs array
+    showing:boolean // STORE: show the preview panel or not
   }
 
   render()
@@ -22,7 +23,7 @@ class PreviewPanel extends React.Component
         key={i} selected={selected} indexNumber={i}/>;
     });
 
-    return <div className="preview-panel">
+    return <div className={`preview-panel ${this.props.showing?"":"hidden"}`}>
       {thumbnails}
     </div>;
   }
@@ -76,6 +77,7 @@ function convertThumbnail(url:string):string
 export default connect((storestate:TheStore)=>{
   return {
     imgs:storestate.imgs,
-    currentImageIndex:storestate.currentIndex
+    currentImageIndex:storestate.currentIndex,
+    showing:storestate.panelShowing
   };
 })(PreviewPanel);

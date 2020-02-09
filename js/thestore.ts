@@ -12,7 +12,12 @@ interface ChangeCurrentIndexAction
     newIndex:number
 }
 
-type ReduxAction=LoadImgurImgsAction|ChangeCurrentIndexAction;
+interface TogglePanelShowing
+{
+    type:"togglePanelShowing"
+}
+
+type ReduxAction=LoadImgurImgsAction|ChangeCurrentIndexAction|TogglePanelShowing;
 
 var store:TheStore;
 
@@ -31,6 +36,14 @@ export function changeCurrentImageIndexAction(newIndex:number):void
     store.dispatch({
         type:"changeCurrentIndex",
         newIndex
+    });
+}
+
+// store action to toggle panel showing
+export function togglePanelShowing():void
+{
+    store.dispatch({
+        type:"togglePanelShowing"
     });
 }
 
@@ -60,14 +73,26 @@ function currentIndexReduce(currentindex:number,act:ReduxAction):number
     return currentindex;
 }
 
+function panelShowingReduce(showing:boolean,act:ReduxAction):boolean
+{
+    if (act.type=="togglePanelShowing")
+    {
+        return !showing;
+    }
+
+    return showing;
+}
+
 store=createStore((state:TheStore,act:ReduxAction)=>{
     return {
         imgs:imgsReduce(state.imgs,act),
-        currentIndex:currentIndexReduce(state.currentIndex,act)
+        currentIndex:currentIndexReduce(state.currentIndex,act),
+        panelShowing:panelShowingReduce(state.panelShowing,act)
     };
 },{
     imgs:[],
-    currentIndex:0
+    currentIndex:0,
+    panelShowing:false
 });
 
 export default store;
