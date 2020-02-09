@@ -10,3 +10,8 @@ declare namespace JSX
         [elementName:string]:any
     }
 }
+
+interface ImageObject
+{
+  link:string
+}

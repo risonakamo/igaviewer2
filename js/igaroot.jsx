@@ -2,14 +2,15 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {getAlbum,getAlbumInfo} from "./imgurhelpers";
-import {loadImgurImgsAction} from "./thestore";
+import {loadImgurImgsAction,changeCurrentImageIndexAction} from "./thestore";
 import PreviewPanel from "./previewpanel/previewpanel";
 
 import Viewer from "viewerjs";
 import "viewerjs/dist/viewer.css";
 
-/* IgaRoot(store-array imgs)
-   imgs: array of imgs to load, from the store*/
+/* IgaRoot(store-array imgs,store-int currentImageIndex)
+   imgs: array of imgs to load, from the store
+   currentImageIndex: the current image index, provided by store*/
 class IgaRoot extends React.Component
 {
   constructor(props)
@@ -17,8 +18,7 @@ class IgaRoot extends React.Component
     super(props);
 
     this.state={
-      currentImage:null,
-      currentImageIndex:0
+      currentImage:null
     };
 
     //image repositioning has not completed, dont save image positioning if the image changes
@@ -127,8 +127,8 @@ class IgaRoot extends React.Component
     }
 
     this.imageChangeInProgress=true;
+    changeCurrentImageIndexAction(imgIndex);
     this.setState({
-      currentImageIndex:imgIndex,
       currentImage:this.props.imgs[imgIndex]
     });
   }
@@ -155,12 +155,12 @@ class IgaRoot extends React.Component
 
       else if (e.key=="ArrowRight" || e.key==" " || e.key=="d")
       {
-        this.navigateImage(this.state.currentImageIndex+1);
+        this.navigateImage(this.props.currentImageIndex+1);
       }
 
       else if (e.key=="ArrowLeft" || e.key=="a")
       {
-        this.navigateImage(this.state.currentImageIndex-1);
+        this.navigateImage(this.props.currentImageIndex-1);
       }
 
       else if (e.key=="f")
@@ -184,7 +184,7 @@ class IgaRoot extends React.Component
   {
     if (this.theviewer)
     {
-      this.theviewer.view(this.state.currentImageIndex);
+      this.theviewer.view(this.props.currentImageIndex);
     }
 
     return <>
@@ -195,13 +195,14 @@ class IgaRoot extends React.Component
           })}
         </ul>
       </div>
-      <PreviewPanel currentImageIndex={this.state.currentImageIndex}/>
+      <PreviewPanel/>
     </>;
   }
 }
 
 export default connect((storestate)=>{
   return {
-    imgs:storestate.imgs
+    imgs:storestate.imgs,
+    currentImageIndex:storestate.currentIndex
   };
 })(IgaRoot);
