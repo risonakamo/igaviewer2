@@ -8,7 +8,7 @@ export function loadImgurImgsAction(data)
     store.dispatch({
         type:"loadImgurImgs",
         data
-    })  ;
+    });
 }
 
 //reducer for imgs, array containing loaded images

@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 
 import "./previewpanel.less";
 
@@ -7,11 +8,11 @@ interface ImageObject
   link:string
 }
 
-/* PreviewPanel(ImageObject[] imgs,int currentImageIndex) */
-export default class PreviewPanel extends React.Component
+/* PreviewPanel(STORE-ImageObject[] imgs,int currentImageIndex) */
+class PreviewPanel extends React.Component
 {
   props:{
-    imgs:ImageObject[] // array of image objects from parent.
+    imgs:ImageObject[] // array of image objects, provided by STORE.
     currentImageIndex:number // index of the current image in the imgs array.
   }
 
@@ -61,3 +62,9 @@ function convertThumbnail(url:string):string
 
   return `https://i.imgur.com/${match[1]}b${match[2]}`;
 }
+
+export default connect((storestate:any)=>{
+  return {
+    imgs:storestate.imgs
+  };
+})(PreviewPanel);
