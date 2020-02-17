@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import {changeCurrentImageIndexAction} from "../thestore";
+import {togglePanelShowing} from "../thestore";
 
 import "./previewpanel.less";
 
@@ -45,17 +45,26 @@ class PreviewThumbnail extends React.Component
   constructor(props:any)
   {
     super(props);
-    this.clickAction=this.clickAction.bind(this);
+    this.navigateAction=this.navigateAction.bind(this);
   }
 
-  clickAction()
+  // click action, use navigate image
+  navigateAction()
   {
     this.props.navigateImage(this.props.indexNumber);
   }
 
+  // double click action, also close the panel using Store function, single click
+  // action already navigates to the image.
+  closePanelAction()
+  {
+    togglePanelShowing();
+  }
+
   render()
   {
-    return <a className={`thumbnail ${this.props.selected?"selected":""}`} onClick={this.clickAction}>
+    return <a className={`thumbnail ${this.props.selected?"selected":""}`} onClick={this.navigateAction}
+      onDoubleClick={this.closePanelAction}>
       <img src={this.props.thumbnailurl}/>
       <div className="select-border"></div>
     </a>;
