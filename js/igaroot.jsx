@@ -186,6 +186,16 @@ class IgaRoot extends React.Component
     });
   }
 
+  // load an array of non imgur links
+  linksLoad(links)
+  {
+    loadImgurImgsAction(_.map(links,(x)=>{
+      return {
+        link:x
+      };
+    }));
+  }
+
   render()
   {
     if (this.theviewer)

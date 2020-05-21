@@ -20,10 +20,12 @@
 .preview-panel .thumbnail {
   position: relative;
   width: 160px;
+  height: 160px;
   margin: 5px;
   border-radius: 3px;
   user-select: none;
   cursor: pointer;
+  overflow: hidden;
 }
 .preview-panel .thumbnail:hover .select-border {
   opacity: 1;

@@ -7,7 +7,7 @@ import "./previewpanel.less";
 
 /* PreviewPanel(STORE-ImageObject[] imgs, STORE-int currentImageIndex, STORE-bool showing,
     callback navigateImage) */
-class PreviewPanel extends React.Component
+class PreviewPanel extends React.PureComponent
 {
   props:{
     imgs:ImageObject[] // STORE: array of image objects
@@ -74,6 +74,11 @@ class PreviewThumbnail extends React.Component
 // give it imgur url, converts it into a thumbnail url
 function convertThumbnail(url:string):string
 {
+  if (url.search(/i\.nhentai\.net/)>=0)
+  {
+    return convertThumbnailNH(url);
+  }
+
   // match1 should be the ID of the image
   // match2 should be the file extension of the image, including the period
   var match=url.match(/https:\/\/i\.imgur\.com\/(\w+)(\.\w+)/);
@@ -84,6 +89,16 @@ function convertThumbnail(url:string):string
   }
 
   return `https://i.imgur.com/${match[1]}b${match[2]}`;
+}
+
+// give it nh url to return thumbnail of nh image
+function convertThumbnailNH(url:string):string
+{
+  // match1=gallery id
+  // match2=thumbnail number
+  var match=url.match(/i\.nhentai\.net\/galleries\/(\d+)\/(\d+)/);
+
+  return `https://t.nhentai.net/galleries/${match[1]}/${match[2]}t.jpg`;
 }
 
 export default connect((storestate:TheStore)=>{

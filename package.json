@@ -4,7 +4,8 @@
   "scripts": {
     "linkall": "npm-link -D webpack webpack-cli babel-loader @babel/core @babel/preset-react less less-loader css-loader mini-css-extract-plugin @babel/preset-typescript typescript fork-ts-checker-webpack-plugin express",
     "server": "node testserver/server",
-    "build": "webpack"
+    "build": "webpack",
+    "watch":"webpack --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
