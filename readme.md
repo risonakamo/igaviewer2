@@ -4,7 +4,7 @@ example: https://risonakamo.github.io/igaviewer2/#V1z82
 
 ### controls
 
-<kbd>ctrl</kdb> + <kbd>enter</kdb> (on first page) load links
+<kbd>ctrl</kbd> + <kbd>enter</kbd> (on first page) load links
 
 <kbd>esc</kbd> open and close thumbnails panel
 
