@@ -20,7 +20,8 @@ class IgaRoot extends React.Component
     this.navigateImage=this.navigateImage.bind(this);
 
     this.state={
-      currentImage:null
+      currentImage:null,
+      linkentryHide:false
     };
 
     //image repositioning has not completed, dont save image positioning if the image changes
@@ -76,6 +77,10 @@ class IgaRoot extends React.Component
     {
       getAlbum(imgurHash[1],(data)=>{
         loadImgurImgsAction(data.data);
+
+        this.setState({
+          linkentryHide:true
+        });
       });
     }
 
@@ -195,6 +200,10 @@ class IgaRoot extends React.Component
         link:x
       };
     }));
+
+    this.setState({
+      linkentryHide:true
+    });
   }
 
   render()
@@ -213,7 +222,7 @@ class IgaRoot extends React.Component
         </ul>
       </div>
       <PreviewPanel navigateImage={this.navigateImage}/>
-      <LinkEntry/>
+      <LinkEntry hide={this.state.linkentryHide}/>
     </>;
   }
 }
