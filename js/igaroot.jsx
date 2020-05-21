@@ -18,6 +18,8 @@ class IgaRoot extends React.Component
   {
     super(props);
     this.navigateImage=this.navigateImage.bind(this);
+    this.imgurLoad=this.imgurLoad.bind(this);
+    this.linksLoad=this.linksLoad.bind(this);
 
     this.state={
       currentImage:null,
@@ -75,13 +77,7 @@ class IgaRoot extends React.Component
 
     if (imgurHash.length>1)
     {
-      getAlbum(imgurHash[1],(data)=>{
-        loadImgurImgsAction(data.data);
-
-        this.setState({
-          linkentryHide:true
-        });
-      });
+      this.imgurLoad(imgurHash[1]);
     }
 
     this.keyControl();
@@ -206,6 +202,20 @@ class IgaRoot extends React.Component
     });
   }
 
+  // load an imgur album id
+  imgurLoad(albumid)
+  {
+    window.location.hash=albumid;
+
+    getAlbum(albumid,(data)=>{
+      loadImgurImgsAction(data.data);
+
+      this.setState({
+        linkentryHide:true
+      });
+    });
+  }
+
   render()
   {
     if (this.theviewer)
@@ -222,7 +232,7 @@ class IgaRoot extends React.Component
         </ul>
       </div>
       <PreviewPanel navigateImage={this.navigateImage}/>
-      <LinkEntry hide={this.state.linkentryHide}/>
+      <LinkEntry hide={this.state.linkentryHide} loadImgur={this.imgurLoad} loadLinks={this.linksLoad}/>
     </>;
   }
 }
