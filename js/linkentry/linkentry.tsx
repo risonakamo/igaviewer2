@@ -20,10 +20,19 @@ export default class LinkEntry extends React.Component
 {
   props:LinkEntryProps
 
+  linkinputref:any
+
   constructor(props:LinkEntryProps)
   {
     super(props);
     this.keyHandler=this.keyHandler.bind(this);
+
+    this.linkinputref=React.createRef();
+  }
+
+  componentDidMount()
+  {
+    this.linkinputref.current.focus();
   }
 
   // handle ctrl entry submit key command
@@ -49,7 +58,8 @@ export default class LinkEntry extends React.Component
   render()
   {
     return <div className="link-entry" style={{display:this.props.hide?"none":""}}>
-      <textarea className="link-input" placeholder="imgur album url or image links" onKeyPress={this.keyHandler}></textarea>
+      <textarea className="link-input" placeholder="imgur album url or image links"
+        onKeyPress={this.keyHandler} ref={this.linkinputref}></textarea>
     </div>;
   }
 }
