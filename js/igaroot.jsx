@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getAlbum,getAlbumInfo} from "./imgurhelpers";
 import {loadImgurImgsAction,changeCurrentImageIndexAction,togglePanelShowing} from "./thestore";
 import PreviewPanel from "./previewpanel/previewpanel";
+import LinkEntry from "./linkentry/linkentry";
 
 import Viewer from "viewerjs";
 import "viewerjs/dist/viewer.css";
@@ -212,6 +213,7 @@ class IgaRoot extends React.Component
         </ul>
       </div>
       <PreviewPanel navigateImage={this.navigateImage}/>
+      <LinkEntry/>
     </>;
   }
 }
