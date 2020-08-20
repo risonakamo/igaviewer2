@@ -23,7 +23,8 @@ class IgaRoot extends React.Component
 
     this.state={
       currentImage:null,
-      linkentryHide:false
+      linkentryHide:false,
+      mouseHidden:false
     };
 
     //image repositioning has not completed, dont save image positioning if the image changes
@@ -34,6 +35,9 @@ class IgaRoot extends React.Component
 
     this.theviewer; //the actual viewer object
     this.theviewerElement=React.createRef(); //the element viewer is attached to
+
+    // mouse hide stuff
+    this.hideTimer=0;
   }
 
   componentDidMount()
@@ -84,6 +88,8 @@ class IgaRoot extends React.Component
 
     window.viewer=this.theviewer;
     window.igaroot=this;
+
+    this.mouseHider();
   }
 
   componentDidUpdate()
@@ -216,6 +222,36 @@ class IgaRoot extends React.Component
     });
   }
 
+  // deploy timer for executing mouse hides
+  mouseHider()
+  {
+    // every 1 second, increment the hide timer. when the hide timer reaches
+    // 5, and the mouse is currently not hidden, hide the mouse
+    setInterval(()=>{
+      this.hideTimer++;
+
+      if (this.hideTimer>=3 && !this.state.mouseHidden)
+      {
+        this.setState({
+          mouseHidden:true
+        });
+      }
+    },1000);
+
+    // every time the mouse moves, set the hide timer back to 0. if the mouse was
+    // hidden, unhide it.
+    document.addEventListener("mousemove",()=>{
+      this.hideTimer=0;
+
+      if (this.state.mouseHidden)
+      {
+        this.setState({
+          mouseHidden:false
+        });
+      }
+    });
+  }
+
   render()
   {
     if (this.theviewer)
@@ -223,8 +259,10 @@ class IgaRoot extends React.Component
       this.theviewer.view(this.props.currentImageIndex);
     }
 
+    var mouseHideClass=this.state.mouseHidden?"mouse-hide":"";
+
     return <>
-      <div className="the-viewer">
+      <div className={`the-viewer ${mouseHideClass}`}>
         <ul ref={this.theviewerElement}>
           {_.map(this.props.imgs,(x,i)=>{
             return <li key={i}><img src={x.link}/></li>;
