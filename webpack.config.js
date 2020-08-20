@@ -51,5 +51,12 @@ module.exports={
 
     resolve:{
         extensions:[".tsx",".ts",".js",".jsx"]
+    },
+
+    stats:{
+        entrypoints:false,
+        modules:false,
+        chunks:false,
+        assets:false
     }
 };

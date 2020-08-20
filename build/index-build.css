@@ -87,4 +87,7 @@ body {
 .iga-root .the-viewer ul {
   display: none;
 }
+.iga-root .the-viewer.mouse-hide img {
+  cursor: none;
+}
 
