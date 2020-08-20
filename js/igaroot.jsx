@@ -73,15 +73,15 @@ class IgaRoot extends React.Component
       }
     });
 
-    // getAlbumInfo("ZVPTV",(data)=>{
-    //   console.log(data);
-    // });
-
     var imgurHash=window.location.hash.split("#");
 
     if (imgurHash.length>1)
     {
       this.imgurLoad(imgurHash[1]);
+
+      getAlbumInfo(imgurHash[1],(data)=>{
+        document.title=data.data.title;
+      });
     }
 
     this.keyControl();
